@@ -15,8 +15,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         link = findViewById(R.id.link_cadastre_se);
         link.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,6 +28,5 @@ public class MainActivity extends AppCompatActivity {
     public void mudarParaTelaDeCadastro(){
        Intent it_telaCadastro = new Intent(this, Tela_cadastro.class);
        startActivity(it_telaCadastro);
-
     }
 }

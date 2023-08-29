@@ -30,7 +30,6 @@ public class Tela_cadastro extends AppCompatActivity {
     public void mudarParaTelaDeLogin(){
        Intent it_mudarTela = new Intent(this, MainActivity.class);
         startActivity(it_mudarTela);
-
     }
 
 }
