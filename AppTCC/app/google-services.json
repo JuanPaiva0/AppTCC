@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "351546294597",
+    "project_id": "tccvacinas-ef028",
+    "storage_bucket": "tccvacinas-ef028.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:351546294597:android:ecf6337a38c6b64665be2c",
+        "android_client_info": {
+          "package_name": "com.example.apptcc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "351546294597-h0t8e387oll1as4a08bjd0tqp71k7dqs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.apptcc",
+            "certificate_hash": "d76b342a9a5c202b84cbcd96545b523c5b845d58"
+          }
+        },
+        {
+          "client_id": "351546294597-vqv2udm07b9vehl6ofdcr296g4ku1ner.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDg2CaARqLi2i7Mj-r6Vtj4-NNoXg8XKyU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "351546294597-vqv2udm07b9vehl6ofdcr296g4ku1ner.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

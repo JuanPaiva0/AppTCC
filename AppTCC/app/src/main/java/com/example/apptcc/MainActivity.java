@@ -6,23 +6,52 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.apptcc.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-
-    TextView link;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        link = findViewById(R.id.link_cadastre_se);
-        link.setOnClickListener(new View.OnClickListener() {
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        binding.linkCadastreSe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mudarParaTelaDeCadastro();
             }
         });
+
+
+        binding.btnEntrar.setOnClickListener(v -> validaCampos());
+
+
+
+
+
     }
+
+
+    public void validaCampos(){
+        String cpf = binding.cpfLogin.getText().toString().trim();
+        String senha = binding.senhaLogin.getText().toString().trim();
+
+        if(!cpf.isEmpty()){
+            if (!senha.isEmpty()){
+
+            } else {
+                Toast.makeText(this, "Informe sua senha", Toast.LENGTH_SHORT).show();
+            }
+
+        } else{
+            Toast.makeText(this, "Informe seu CPF", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
 
     public void mudarParaTelaDeCadastro(){
