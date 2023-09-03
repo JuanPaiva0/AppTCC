@@ -62,7 +62,7 @@ public class Tela_cadastro extends AppCompatActivity {
     }
 
     public void criarConta(String nome, String email, String cpf, String senha){
-        auth.createUserWithEmailAndPassword()
+
     }
 
 
