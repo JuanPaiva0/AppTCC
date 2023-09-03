@@ -5,12 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apptcc.Model.Usuario;
 import com.example.apptcc.databinding.ActivityTelaCadastroBinding;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Tela_cadastro extends AppCompatActivity {
 
@@ -25,6 +29,13 @@ public class Tela_cadastro extends AppCompatActivity {
         binding = ActivityTelaCadastroBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         auth = FirebaseAuth.getInstance();
+
+        binding.btnCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                validaCampos();
+            }
+        });
 
        binding.linkLogin.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -45,7 +56,7 @@ public class Tela_cadastro extends AppCompatActivity {
                 if (!cpf.isEmpty()){
                     if (!senha.isEmpty()){
 
-                        criarConta(nome, email, cpf, senha);
+                        criarConta(email, senha);
 
                     } else {
                         Toast.makeText(this, "Informe seu nome", Toast.LENGTH_SHORT).show();
@@ -61,8 +72,31 @@ public class Tela_cadastro extends AppCompatActivity {
         }
     }
 
-    public void criarConta(String nome, String email, String cpf, String senha){
+    public void criarConta(String email, String senha){
+        auth.createUserWithEmailAndPassword(
+                email, senha
+        ).addOnCompleteListener(task ->{
+            if (task.isSuccessful()){
+                FirebaseUser user = auth.getCurrentUser();
 
+                Usuario usuario = new Usuario();
+
+                usuario.setNome(binding.NomeCadastro.getText().toString().trim());
+                usuario.setCpf(binding.cpfCadastro.getText().toString().trim());
+
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("user").document(user.getUid()).set(usuario).addOnSuccessListener(aVoid ->{
+
+                    Toast.makeText(this, "Usuário registrado com sucesso", Toast.LENGTH_SHORT).show();
+
+                }).addOnFailureListener(e ->{
+
+                });
+            } else{
+                Toast.makeText(this, "Falha ao registrar usuario", Toast.LENGTH_SHORT).show();
+                Log.e("Registro", "Falha ao registrar usuário", task.getException());
+            }
+        });
     }
 
 
