@@ -34,6 +34,7 @@ public class Tela_cadastro extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 validaCampos();
+                mudarParaHome();
             }
         });
 
@@ -47,25 +48,30 @@ public class Tela_cadastro extends AppCompatActivity {
 
     public void validaCampos(){
         String nome = binding.NomeCadastro.getText().toString().trim();
+        String sobreNome = binding.sobreNomeCadastro.getText().toString().trim();
         String email = binding.emailCadastro.getText().toString().trim();
         String cpf = binding.cpfCadastro.getText().toString().trim();
         String senha = binding.senhaCadastro.getText().toString().trim();
 
         if (!nome.isEmpty()){
-            if (!email.isEmpty()){
-                if (!cpf.isEmpty()){
-                    if (!senha.isEmpty()){
+            if (!sobreNome.isEmpty()){
+                if (!email.isEmpty()){
+                    if (!cpf.isEmpty()){
+                        if(!senha.isEmpty()){
 
-                        criarConta(email, senha);
+                            criarConta(email, senha);
 
+                        } else{
+                            Toast.makeText(this, "Informe sua senha", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(this, "Informe seu nome", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Informe seu  cpf", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(this, "Informe seu cpf", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Informe seu email", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(this, "Informe seu email", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Informe seu sobrenome", Toast.LENGTH_SHORT).show();
             }
         } else {
             Toast.makeText(this, "Informe seu nome", Toast.LENGTH_SHORT).show();
@@ -82,21 +88,27 @@ public class Tela_cadastro extends AppCompatActivity {
                 Usuario usuario = new Usuario();
 
                 usuario.setNome(binding.NomeCadastro.getText().toString().trim());
+                usuario.setSobrenome(binding.sobreNomeCadastro.getText().toString().trim());
+                usuario.setEmail(binding.emailCadastro.getText().toString().trim());
                 usuario.setCpf(binding.cpfCadastro.getText().toString().trim());
 
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-                db.collection("user").document(user.getUid()).set(usuario).addOnSuccessListener(aVoid ->{
-
-                    Toast.makeText(this, "Usuário registrado com sucesso", Toast.LENGTH_SHORT).show();
+                db.collection("users").document(user.getUid()).set(usuario).addOnSuccessListener(aVoid ->{
 
                 }).addOnFailureListener(e ->{
 
                 });
+                Toast.makeText(this, "Usuário registrado com sucesso", Toast.LENGTH_SHORT).show();
             } else{
                 Toast.makeText(this, "Falha ao registrar usuario", Toast.LENGTH_SHORT).show();
                 Log.e("Registro", "Falha ao registrar usuário", task.getException());
             }
         });
+    }
+
+    public void mudarParaHome(){
+        Intent it_mudarTela = new Intent();
+        startActivity(it_mudarTela);
     }
 
 
