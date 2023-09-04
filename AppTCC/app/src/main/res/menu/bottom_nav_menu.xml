@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_vacina"
         android:icon="@drawable/vacina"
         android:title="@string/nav_vacinas" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_home"
         android:icon="@drawable/casa"
         android:title="@string/nav_home" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_perfil"
         android:icon="@drawable/perfil"
         android:title="@string/nav_perfil" />
 

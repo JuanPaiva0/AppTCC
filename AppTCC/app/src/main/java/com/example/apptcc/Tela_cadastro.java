@@ -98,6 +98,7 @@ public class Tela_cadastro extends AppCompatActivity {
                 }).addOnFailureListener(e ->{
 
                 });
+                mudarParaHome();
                 Toast.makeText(this, "Usuário registrado com sucesso", Toast.LENGTH_SHORT).show();
             } else{
                 Toast.makeText(this, "Falha ao registrar usuario", Toast.LENGTH_SHORT).show();

@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 validaCampos();
-                mudarParaHome();
+
             }
         });
     }
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     if (documentSnapshot.exists()) {
                         Usuario usuario = documentSnapshot.toObject(Usuario.class);
                         if (usuario != null && usuario.getCpf().equals(cpf)){
-
+                            mudarParaHome();
                         } else{
                             Toast.makeText(this, "CPF não cadastrado", Toast.LENGTH_SHORT).show();
                         }
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void mudarParaHome(){
-        Intent it_mudarTela =  new Intent();
+        Intent it_mudarTela =  new Intent(this, NavigationScreen.class);
         startActivity(it_mudarTela);
     }
 
