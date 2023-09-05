@@ -30,19 +30,11 @@ public class MainActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
 
-        binding.linkCadastreSe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mudarParaTelaDeCadastro();
-            }
-        });
-        binding.btnEntrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                validaCampos();
+        binding.linkCadastreSe.setOnClickListener(v -> mudarParaTelaDeCadastro());
 
-            }
-        });
+        binding.linkRecuperarSenha.setOnClickListener(view -> mudarParaTelaRdefinirSenha());
+
+        binding.btnEntrar.setOnClickListener(view -> validaCampos());
     }
 
 
@@ -78,9 +70,10 @@ public class MainActivity extends AppCompatActivity {
                     if (documentSnapshot.exists()) {
                         Usuario usuario = documentSnapshot.toObject(Usuario.class);
                         if (usuario != null && usuario.getCpf().equals(cpf)){
+                            finish();
                             mudarParaHome();
                         } else{
-                            Toast.makeText(this, "CPF não cadastrado", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "CPF não cadastrado ou CPF invalido", Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         Toast.makeText(this, "Documento não encontrado", Toast.LENGTH_SHORT).show();
@@ -89,13 +82,25 @@ public class MainActivity extends AppCompatActivity {
 
                 });
             } else{
-                Toast.makeText(this, "Falha ao fazer login", Toast.LENGTH_SHORT).show();
+                String resposta = task.getException().toString();
+                opcoesErro(resposta);
                 Log.e("Login", "Falha ao fazer login", task.getException());
             }
         });
     }
 
 
+    public void opcoesErro(String resposta){
+        if(resposta.contains("The email address is badly formatted")){
+            Toast.makeText(this, "Email inválido", Toast.LENGTH_SHORT).show();
+        } else if (resposta.contains("There is no user record corresponding to this identifier")) {
+            Toast.makeText(this, "Email não cadastrado", Toast.LENGTH_SHORT).show();
+        } else if (resposta.contains(" The password is invalid or the user does not have a password")){
+            Toast.makeText(this, "Senha inválida", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+//--------------------- Metodos para mudança de telas ----------------------------------------------
 
     public void mudarParaHome(){
         Intent it_mudarTela =  new Intent(this, NavigationScreen.class);
@@ -105,5 +110,10 @@ public class MainActivity extends AppCompatActivity {
     public void mudarParaTelaDeCadastro(){
        Intent it_telaCadastro = new Intent(this, Tela_cadastro.class);
        startActivity(it_telaCadastro);
+    }
+
+    public void mudarParaTelaRdefinirSenha(){
+        Intent it_TelaRedefinirSenha = new Intent(this, Tela_recuperarSenha.class);
+        startActivity(it_TelaRedefinirSenha);
     }
 }

@@ -12,6 +12,9 @@
         android:theme="@style/Theme.AppTCC"
         tools:targetApi="31">
         <activity
+            android:name=".Tela_recuperarSenha"
+            android:exported="false" />
+        <activity
             android:name=".NavigationScreen"
             android:exported="false"
             android:label="@string/title_activity_navigation_screen" />
