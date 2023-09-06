@@ -18,7 +18,6 @@ public class TelaInicial extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tela_inicial);
         binding = ActivityTelaInicialBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
