@@ -7,7 +7,7 @@
 
     <activity
         android:id="@+id/navigationScreen"
-        android:name="com.example.apptcc.NavigationScreen"
+        android:name="com.example.apptcc.View.NavigationScreen"
         android:label="activity_navigation_screen"
         tools:layout="@layout/activity_navigation_screen" />
     <fragment

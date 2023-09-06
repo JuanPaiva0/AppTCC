@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_inicial" >
+
+    <Button
+        android:id="@+id/btnMaisInformacao"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:backgroundTint="@color/cor2"
+        android:text="ACESSAR"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInicial"
+        app:layout_constraintVertical_bias="0.873" />
+
+    <TextView
+        android:id="@+id/textInicial"
+        android:layout_width="376dp"
+        android:layout_height="98dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="19dp"
+        android:fontFamily="sans-serif-light"
+        android:letterSpacing="0"
+        android:text="Tenha todas as informações sobre vacinas de uma forma simples, digital e acessível"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="316dp" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="266dp"
+        android:layout_height="261dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="73dp"
+        app:layout_constraintBottom_toTopOf="@+id/textInicial"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/caderneta_digital" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

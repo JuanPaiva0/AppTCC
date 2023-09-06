@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cor5"
-    tools:context=".MainActivity">
+    android:background="@drawable/background_login"
+    tools:context=".View.MainActivity">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="302dp"
         android:layout_height="346dp"
-        android:layout_marginTop="460dp"
+        android:layout_marginTop="444dp"
         android:layout_marginEnd="-40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.979"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ze_gotinha_sem_fundo_cortado" />
@@ -24,23 +24,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Login"
+        android:fontFamily="sans-serif-thin"
+        android:text="acessar conta"
         android:textColor="#000000"
-        android:textSize="35sp"
-        android:textStyle="bold"
+        android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txtCpf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="CPF"
+        android:fontFamily="sans-serif-light"
+        android:text="cpf"
         android:textColor="#000000"
         android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,17 +59,17 @@
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/txtCpf" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Senha"
+        android:fontFamily="sans-serif-light"
+        android:text="senha"
         android:textColor="#000000"
         android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.084"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,9 +93,11 @@
 
     <Button
         android:id="@+id/btn_entrar"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="220dp"
+        android:layout_marginEnd="20dp"
         android:backgroundTint="@color/cor2"
         android:text="entrar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -132,14 +134,14 @@
         app:layout_constraintTop_toBottomOf="@+id/link_recuperar_senha" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/txtEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Email"
+        android:fontFamily="sans-serif-light"
+        android:text="email"
         android:textColor="#000000"
         android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
@@ -158,7 +160,7 @@
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
 
     <TextView
         android:id="@+id/link_recuperar_senha"
@@ -167,7 +169,6 @@
         android:layout_marginTop="10dp"
         android:text="Esqueci minha senha"
         android:textColor="#434163"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.108"
         app:layout_constraintStart_toStartOf="parent"
