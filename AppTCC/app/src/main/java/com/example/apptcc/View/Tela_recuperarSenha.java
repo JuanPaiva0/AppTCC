@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -50,9 +51,19 @@ public class Tela_recuperarSenha extends AppCompatActivity {
                 finish();
                 mudarTelaParaLogin();
             } else {
-                Toast.makeText(this, "Ocorreu um erro", Toast.LENGTH_SHORT).show();
+                String resposta = task.getException().toString();
+                opcoesErro(resposta);
+                Log.e("Login", "Falha ao fazer login", task.getException());
             }
         });
+    }
+
+    public void opcoesErro(String resposta){
+        if (resposta.contains("The email address is badly formatted")){
+            Toast.makeText(this, "Email inválido", Toast.LENGTH_SHORT).show();
+        } else if (resposta.contains("There is no user record corresponding to this identifier. The user may have been deleted")) {
+            Toast.makeText(this, "Email não cadastrado", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void mudarTelaParaLogin(){
