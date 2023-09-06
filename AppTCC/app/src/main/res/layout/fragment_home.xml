@@ -63,33 +63,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
-        <ImageView
-            android:id="@+id/imageView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:elevation="20dp"
-            android:src="@drawable/calendar"
-            tools:layout_editor_absoluteX="173dp"
-            tools:layout_editor_absoluteY="169dp" />
-
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:elevation="20dp"
-            android:src="@drawable/family"
-            tools:layout_editor_absoluteX="173dp"
-            tools:layout_editor_absoluteY="295dp" />
-
-        <ImageView
-            android:id="@+id/imageView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:elevation="20dp"
-            android:src="@drawable/plus"
-            tools:layout_editor_absoluteX="173dp"
-            tools:layout_editor_absoluteY="420dp" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
