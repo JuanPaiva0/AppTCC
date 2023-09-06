@@ -7,7 +7,7 @@
 
             <stroke
                 android:width="2dp"
-                android:color="@color/cor5" />
+                android:color="@color/background" />
         </shape>
     </item>
 </selector>
