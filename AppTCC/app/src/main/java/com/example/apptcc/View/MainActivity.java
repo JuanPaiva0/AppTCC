@@ -68,8 +68,10 @@ public class MainActivity extends AppCompatActivity {
                     if (documentSnapshot.exists()) {
                         Usuario usuario = documentSnapshot.toObject(Usuario.class);
                         if (usuario != null && usuario.getCpf().equals(cpf)){
-                            finish();
-                            mudarParaHome();
+                            if(user != null){
+                                finish();
+                                mudarParaHome();
+                            }
                         } else{
                             Toast.makeText(this, "CPF não cadastrado ou CPF invalido", Toast.LENGTH_SHORT).show();
                         }

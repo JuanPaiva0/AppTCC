@@ -7,8 +7,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.apptcc.Model.Usuario;
 import com.example.apptcc.R;
+import com.example.apptcc.databinding.FragmentHomeBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +24,10 @@ import com.example.apptcc.R;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+    private FragmentHomeBinding binding;
+    private FirebaseAuth auth;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
 
 
@@ -53,6 +65,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        auth = FirebaseAuth.getInstance();
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -63,6 +77,40 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+        TextView txt = view.findViewById(R.id.txtBemVindo);
+        buscarNomeUsuario(new nomeCallback() {
+            @Override
+            public void nomeUsuario(String nome) {
+                txt.setText("Seja bem vindo, " + nome);
+            }
+        });
+
+        
+
+
+
+
+        return view;
+    }
+
+    public interface nomeCallback {
+        void nomeUsuario(String nome);
+    }
+
+
+    public void buscarNomeUsuario(nomeCallback callback){
+        CollectionReference collec = db.collection("users");
+        FirebaseUser user = auth.getCurrentUser();
+
+        collec.document(user.getUid()).get().addOnCompleteListener(task -> {
+           if(task.isSuccessful()){
+               DocumentSnapshot document = task.getResult();
+               Usuario usuario  = document.toObject(Usuario.class);
+               String nome = usuario.getNome();
+               callback.nomeUsuario(nome);
+           }
+        });
     }
 }
