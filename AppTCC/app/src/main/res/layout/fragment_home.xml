@@ -11,9 +11,11 @@
     <!-- TODO: Update blank fragment layout -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/HomeBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_inicial">
+        android:background="@drawable/background_inicial"
+        tools:ignore="InvalidId">
 
         <TextView
             android:id="@+id/txtBemVindo"
@@ -30,39 +32,90 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:id="@+id/view3"
-            android:layout_width="209dp"
+        <ImageButton
+            android:id="@+id/btnHomeCalendario"
+            android:layout_width="210dp"
             android:layout_height="120dp"
-            android:layout_marginTop="40dp"
-            android:background="@color/cor1"
-            android:elevation="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view2" />
-
-        <View
-            android:id="@+id/view2"
-            android:layout_width="209dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="40dp"
-            android:background="#D1BBFD"
-            android:elevation="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="209dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="70dp"
-            android:background="@color/cor1"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/format_btns_home"
             android:elevation="10dp"
+            android:src="@drawable/calendariodesktop"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.517"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtBemVindo" />
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:elevation="10dp"
+            android:text="Calendario vacinal"
+            android:textColor="#000000"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@+id/btnHomeCalendario"
+            app:layout_constraintEnd_toEndOf="@+id/btnHomeCalendario"
+            app:layout_constraintHorizontal_bias="0.459"
+            app:layout_constraintStart_toStartOf="@+id/btnHomeCalendario"
+            app:layout_constraintTop_toTopOf="@+id/btnHomeCalendario"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageButton
+            android:id="@+id/btnHomeFamilia"
+            android:layout_width="210dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/format_btns_home"
+            android:elevation="10dp"
+            android:src="@drawable/familia"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnHomeCalendario" />
+
+        <ImageButton
+            android:id="@+id/btnHomeAdicionarVacina"
+            android:layout_width="210dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/format_btns_home"
+            android:elevation="10dp"
+            android:src="@drawable/botao_adicionar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnHomeFamilia" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:elevation="10dp"
+            android:text="Adicionar Vacina"
+            android:textColor="#000000"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@+id/btnHomeAdicionarVacina"
+            app:layout_constraintEnd_toEndOf="@+id/btnHomeAdicionarVacina"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="@+id/btnHomeAdicionarVacina"
+            app:layout_constraintTop_toTopOf="@+id/btnHomeAdicionarVacina"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:elevation="10dp"
+            android:text="Monitorar Familiar"
+            android:textColor="#000000"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@+id/btnHomeFamilia"
+            app:layout_constraintEnd_toEndOf="@+id/btnHomeFamilia"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="@+id/btnHomeFamilia"
+            app:layout_constraintTop_toTopOf="@+id/btnHomeFamilia"
+            app:layout_constraintVertical_bias="1.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
