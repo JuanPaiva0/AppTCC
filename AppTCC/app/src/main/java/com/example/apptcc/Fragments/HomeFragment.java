@@ -1,5 +1,6 @@
 package com.example.apptcc.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.apptcc.Model.Usuario;
 import com.example.apptcc.R;
+import com.example.apptcc.RecyclerView.TelaDependenteRecycler;
 import com.example.apptcc.databinding.FragmentHomeBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -71,6 +73,8 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
@@ -84,6 +88,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void nomeUsuario(String nome) {
                 txt.setText("Seja bem vindo, " + nome);
+            }
+        });
+
+        binding.btnHomeFamilia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mudarTelaDependentes();
             }
         });
 
@@ -107,5 +118,10 @@ public class HomeFragment extends Fragment {
                callback.nomeUsuario(nome);
            }
         });
+    }
+
+    public void mudarTelaDependentes(){
+        Intent it_mudarTela = new Intent(getActivity(), TelaDependenteRecycler.class);
+        startActivity(it_mudarTela);
     }
 }
