@@ -96,10 +96,6 @@ public class PerfilFragment extends Fragment {
         bindind.txtPerfilRedefinirSenha.setOnClickListener(view1 -> {
             mudarParaTelaRdefinirSenha();
         });
-
-
-
-
         return view;
     }
 
