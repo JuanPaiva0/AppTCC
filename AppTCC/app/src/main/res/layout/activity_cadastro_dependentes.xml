@@ -5,40 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_login"
-    tools:context=".View.Tela_cadastro">
-
+    tools:context=".View.CadastroDependentes">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageView"
         android:layout_width="302dp"
         android:layout_height="346dp"
         android:layout_marginTop="490dp"
         android:layout_marginEnd="-40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.959"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ze_gotinha_sem_fundo_cortado" />
 
-
     <TextView
-        android:id="@+id/TituloCadastro"
+        android:id="@+id/textView24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="90dp"
-        android:fontFamily="sans-serif-thin"
-        android:text="faça seu cadastro"
+        android:text="Cadastro de dependentes"
         android:textColor="#000000"
-        android:textSize="35sp"
+        android:textSize="25sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txt_nomeCadastro"
+        android:id="@+id/txt_nomeCadastroDependente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="sans-serif-light"
         android:text="Nome"
         android:textColor="#000000"
@@ -46,10 +44,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.114"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TituloCadastro" />
+        app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
     <EditText
-        android:id="@+id/NomeCadastro"
+        android:id="@+id/nomeCadastroDependente"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -61,11 +59,11 @@
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_nomeCadastro" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_nomeCadastroDependente" />
 
 
     <TextView
-        android:id="@+id/txt_SobreNome"
+        android:id="@+id/txt_SobreNomeDependente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -76,10 +74,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.136"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NomeCadastro" />
+        app:layout_constraintTop_toBottomOf="@+id/nomeCadastroDependente" />
 
     <EditText
-        android:id="@+id/sobreNomeCadastro"
+        android:id="@+id/sobreNomeCadastroDependente"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -91,10 +89,10 @@
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_SobreNome" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_SobreNomeDependente" />
 
     <TextView
-        android:id="@+id/txt_emailCadastro"
+        android:id="@+id/txt_emailCadastroDependente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -105,10 +103,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.113"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sobreNomeCadastro" />
+        app:layout_constraintTop_toBottomOf="@+id/sobreNomeCadastroDependente" />
 
     <EditText
-        android:id="@+id/emailCadastro"
+        android:id="@+id/emailCadastroDependente"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -120,7 +118,7 @@
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_emailCadastro" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_emailCadastroDependente" />
 
     <TextView
         android:id="@+id/textView8"
@@ -134,10 +132,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.115"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailCadastro" />
+        app:layout_constraintTop_toBottomOf="@+id/emailCadastroDependente" />
 
     <EditText
-        android:id="@+id/senhaCadastro"
+        android:id="@+id/senhaCadastroDependente"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -153,49 +151,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="15dp"
-        android:text="Já possui um login?"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/senhaCadastroDependente" />
-
-    <TextView
-        android:id="@+id/link_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:onClick="mudar"
-        android:text="Entrar"
-        android:textColor="#434163"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/senhaCadastroDependente" />
-
-    <Button
-        android:id="@+id/btn_cadastrar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="175dp"
-        android:layout_marginEnd="20dp"
-        android:backgroundTint="@color/cor2"
-        android:elevation="10dp"
-        android:text="Cadastrar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/senhaCadastroDependente" />
-
-    <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -207,10 +162,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toEndOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/emailCadastro" />
+        app:layout_constraintTop_toBottomOf="@+id/emailCadastroDependente" />
 
     <EditText
-        android:id="@+id/cpfCadastro"
+        android:id="@+id/cpfCadastroDependente"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -220,8 +175,19 @@
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.629"
-        app:layout_constraintStart_toEndOf="@+id/senhaCadastro"
+        app:layout_constraintStart_toEndOf="@+id/senhaCadastroDependente"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
-
+    <Button
+        android:id="@+id/btnCadastroDpendentes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="190dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="@color/cor2"
+        android:text="cadastrar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/senhaCadastroDependente" />
 </androidx.constraintlayout.widget.ConstraintLayout>
