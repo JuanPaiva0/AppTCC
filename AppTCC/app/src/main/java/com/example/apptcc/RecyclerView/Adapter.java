@@ -1,5 +1,6 @@
 package com.example.apptcc.RecyclerView;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -7,12 +8,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.apptcc.R;
+
 public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+
+        View itensLista = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_dependentes, parent, false);
+
+        return new MyViewHolder(itensLista);
     }
 
     @Override
@@ -32,6 +38,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            nome = itemView.findViewById(R.id.nomeDependente);
+            cpf = itemView.findViewById(R.id.cpfDependente);
         }
     }
 }
