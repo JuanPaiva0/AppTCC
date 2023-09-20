@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.example.apptcc.R;
+import com.example.apptcc.View.CadastroDependentes;
 import com.example.apptcc.View.Tela_buscarDependente;
 import com.example.apptcc.databinding.ActivityTelaDependenteRecyclerBinding;
 
@@ -34,19 +35,28 @@ public class TelaDependenteRecycler extends AppCompatActivity {
             btnSim.setOnClickListener(view1 -> {
                 mudarTelaBuscaDependente();
             });
+
+            btnNao.setOnClickListener(view2 -> {
+                mudarTelaCadastarDependente();
+            });
         });
 
-//        recyclerView = binding.recyclerViewDependentes;
-//
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-//        recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setHasFixedSize(true);
+        recyclerView = binding.recyclerViewDependentes;
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
 
 
     }
 
     public void mudarTelaBuscaDependente(){
         Intent it_mudarTela = new Intent(this, Tela_buscarDependente.class);
+        startActivity(it_mudarTela);
+    }
+
+    public void mudarTelaCadastarDependente(){
+        Intent it_mudarTela = new Intent(this, CadastroDependentes.class);
         startActivity(it_mudarTela);
     }
 }
