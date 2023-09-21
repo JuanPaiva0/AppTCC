@@ -65,7 +65,7 @@
         android:layout_marginEnd="15dp"
         android:text="NomeUsuario"
         android:textColor="#000000"
-        android:textSize="15sp"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView23" />
@@ -87,7 +87,7 @@
         android:id="@+id/btnPopUpMudarCpf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="33dp"
         android:layout_marginEnd="10dp"
         android:backgroundTint="@color/cor2"
         android:text="Mudar CPF"

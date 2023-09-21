@@ -7,16 +7,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
+import com.example.apptcc.Model.Usuario;
 import com.example.apptcc.R;
 import com.example.apptcc.View.CadastroDependentes;
 import com.example.apptcc.View.Tela_buscarDependente;
 import com.example.apptcc.databinding.ActivityTelaDependenteRecyclerBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TelaDependenteRecycler extends AppCompatActivity {
     private ActivityTelaDependenteRecyclerBinding binding;
     private RecyclerView recyclerView;
+    private FirebaseFirestore db;
 
 
     @Override
@@ -26,6 +37,10 @@ public class TelaDependenteRecycler extends AppCompatActivity {
         setContentView(binding.getRoot());
         Dialog popup = new Dialog(this);
         popup.setContentView(R.layout.popup_dependente);
+        recyclerView = binding.recyclerViewDependentes;
+        db = FirebaseFirestore.getInstance();
+
+        verificarDependentes();
 
         binding.btnCadastrarDependente.setOnClickListener(view -> {
             Button btnSim =  popup.findViewById(R.id.btnPopUpSim);
@@ -33,21 +48,51 @@ public class TelaDependenteRecycler extends AppCompatActivity {
             popup.show();
 
             btnSim.setOnClickListener(view1 -> {
+                popup.dismiss();
                 mudarTelaBuscaDependente();
             });
 
             btnNao.setOnClickListener(view2 -> {
+                popup.dismiss();
                 mudarTelaCadastarDependente();
             });
         });
-
-        recyclerView = binding.recyclerViewDependentes;
-
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
+    }
 
+    public void verificarDependentes(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+        if (user != null) {
+            CollectionReference collec = db.collection("dependentes");
+
+            collec.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()){
+                    List<Usuario> dependentesList = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Usuario dependentes = document.toObject(Usuario.class);
+                        dependentesList.add(dependentes);
+                    }
+
+                    if (!dependentesList.isEmpty()){
+                        setupRecyclerView(dependentesList);
+                        binding.txtSemDependentes.setVisibility(View.GONE);
+                    } else {
+                        binding.recyclerViewDependentes.setVisibility(View.GONE);
+                        binding.txtSemDependentes.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
+        }
+    }
+
+    private void setupRecyclerView(List<Usuario> dependentesList){
+        Adapter adapter = new Adapter(dependentesList);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     public void mudarTelaBuscaDependente(){

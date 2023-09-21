@@ -23,7 +23,7 @@
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="270dp"
         android:text="Digite o CPF do dependente"
         android:textColor="#000000"
         android:textSize="25sp"

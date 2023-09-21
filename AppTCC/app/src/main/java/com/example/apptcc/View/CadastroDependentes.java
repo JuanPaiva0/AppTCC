@@ -101,22 +101,19 @@ public class CadastroDependentes extends AppCompatActivity {
                 infosDependente.setEmail(binding.emailCadastroDependente.getText().toString());
                 infosDependente.setCpf(binding.cpfCadastroDependente.getText().toString());
 
-                // 1. Adicione o novo dependente à coleção "users" com seu próprio UID.
                 usersCollection.document(dependente.getUid()).set(infosDependente).addOnSuccessListener(aVoid -> {
-                    // 2. Adicione o UID do novo dependente à subcoleção "dependentes" do usuário atualmente logado.
                     db.collection("users").document(usuarioResponsavel)
                             .collection("dependentes")
                             .document(dependente.getUid())
                             .set(infosDependente).addOnSuccessListener(documentReference -> {
-                                // O dependente foi adicionado com sucesso às duas coleções.
                                 Toast.makeText(this, "Dependente cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
                                 finish();
                                 voltarTelaDependentes();
                             }).addOnFailureListener(e -> {
-                                // Trate as falhas aqui.
+
                             });
                 }).addOnFailureListener(e -> {
-                    // Trate as falhas aqui.
+
                 });
             } else {
                 String resposta = task.getException().toString();

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.apptcc.Model.Usuario;
 import com.example.apptcc.R;
@@ -58,6 +59,7 @@ public class Tela_buscarDependente extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     cadastrarDependentes();
+                    popup.dismiss();
                 }
             });
 
@@ -72,6 +74,7 @@ public class Tela_buscarDependente extends AppCompatActivity {
 
     public void buscaDependente(infosCallback callback){
         CollectionReference collec = db.collection("users");
+
 
         String cpf = binding.txtBuscaDependente.getText().toString().trim();
 
@@ -90,36 +93,59 @@ public class Tela_buscarDependente extends AppCompatActivity {
         });
     }
 
+
+
     public void cadastrarDependentes(){
         CollectionReference collec = db.collection("users");
+        CollectionReference ref = collec.document(auth.getCurrentUser().getUid()).collection("dependentes");
         FirebaseUser user = auth.getCurrentUser();
+
 
         String cpf = binding.txtBuscaDependente.getText().toString().trim();
 
-        collec.whereEqualTo("cpf", cpf).get().addOnCompleteListener(task -> {
-           if (task.isSuccessful()){
-               QuerySnapshot documents = task.getResult();
-               if (!documents.isEmpty()){
-                   DocumentSnapshot document = documents.getDocuments().get(0);
+        collec.document(user.getUid()).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()){
+                DocumentSnapshot document = task.getResult();
+                Usuario usuario = document.toObject(Usuario.class);
+                String cpfusuario = usuario.getCpf();
+                if (cpf.equals(cpfusuario)){
+                    Toast.makeText(this, "CPF inválido", Toast.LENGTH_SHORT).show();
+                } else {
+                    collec.whereEqualTo("cpf", cpf).get().addOnCompleteListener(task1 -> {
+                        if (task.isSuccessful()){
+                            QuerySnapshot documents = task1.getResult();
+                            ref.whereEqualTo("cpf", cpf).get().addOnCompleteListener(task2 -> {
+                                if (task.isSuccessful() && !task2.getResult().isEmpty()) {
+                                    //o CPF já esta cadastrado
+                                    Toast.makeText(this, "Esse cpf já esta cadastrado", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    if (!documents.isEmpty()) {
+                                        DocumentSnapshot documentos = documents.getDocuments().get(0);
 
-                   Usuario dependente = new Usuario();
+                                        Usuario dependente = new Usuario();
 
-                   dependente.setNome(document.getString("nome"));
-                   dependente.setSobrenome(document.getString("sobrenome"));
-                   dependente.setEmail(document.getString("email"));
-                   dependente.setCpf(document.getString("cpf"));
+                                        dependente.setNome(documentos.getString("nome"));
+                                        dependente.setSobrenome(documentos.getString("sobrenome"));
+                                        dependente.setEmail(documentos.getString("email"));
+                                        dependente.setCpf(documentos.getString("cpf"));
 
-                   db.collection("users").document(user.getUid())
-                           .collection("dependentes")
-                           .add(dependente).addOnSuccessListener(documentReference -> {
-                                finish();
-                                voltarTelaDependentes();
-                           }).addOnFailureListener(e -> {
+                                        db.collection("users").document(user.getUid())
+                                                .collection("dependentes")
+                                                .add(dependente).addOnSuccessListener(documentReference -> {
+                                                    finish();
+                                                    voltarTelaDependentes();
+                                                }).addOnFailureListener(e -> {
 
-                           });
-               }
-           }
+                                                });
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+            }
         });
+
     }
 
     public void voltarTelaDependentes(){

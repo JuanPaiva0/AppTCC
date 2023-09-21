@@ -8,9 +8,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.apptcc.Model.Usuario;
 import com.example.apptcc.R;
 
+import java.util.List;
+
 public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
+    private List<Usuario> dependentesList;
+
+    public Adapter(List<Usuario> dependentesList){
+        this.dependentesList = dependentesList;
+    }
 
     @NonNull
     @Override
@@ -23,12 +31,17 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        Usuario dependente = dependentesList.get(position);
+
+        holder.nome.setText(dependente.getNome() + " " + dependente.getSobrenome());
+        holder.cpf.setText(dependente.getCpf());
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+
+        return dependentesList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
