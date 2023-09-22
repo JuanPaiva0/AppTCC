@@ -40,7 +40,7 @@ public class TelaDependenteRecycler extends AppCompatActivity {
         recyclerView = binding.recyclerViewDependentes;
         db = FirebaseFirestore.getInstance();
 
-        verificarDependentes();
+
 
         binding.btnCadastrarDependente.setOnClickListener(view -> {
             Button btnSim =  popup.findViewById(R.id.btnPopUpSim);
@@ -57,6 +57,7 @@ public class TelaDependenteRecycler extends AppCompatActivity {
                 mudarTelaCadastarDependente();
             });
         });
+        verificarDependentes();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
@@ -77,7 +78,7 @@ public class TelaDependenteRecycler extends AppCompatActivity {
                         dependentesList.add(dependentes);
                     }
 
-                    if (!dependentesList.isEmpty()){
+                    if (!dependentesList.isEmpty()) {
                         setupRecyclerView(dependentesList);
                         binding.txtSemDependentes.setVisibility(View.GONE);
                     } else {
