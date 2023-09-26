@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apptcc.Model.Dependente;
 import com.example.apptcc.Model.Usuario;
 import com.example.apptcc.R;
 import com.example.apptcc.RecyclerView.TelaDependenteRecycler;
@@ -122,7 +123,7 @@ public class Tela_buscarDependente extends AppCompatActivity {
                                     if (!documents.isEmpty()) {
                                         DocumentSnapshot documentos = documents.getDocuments().get(0);
 
-                                        Usuario dependente = new Usuario();
+                                        Dependente dependente = new Dependente();
 
                                         dependente.setNome(documentos.getString("nome"));
                                         dependente.setSobrenome(documentos.getString("sobrenome"));

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.apptcc.Model.Dependente;
 import com.example.apptcc.Model.Usuario;
 import com.example.apptcc.R;
 import com.example.apptcc.RecyclerView.TelaDependenteRecycler;
@@ -93,7 +94,7 @@ public class CadastroDependentes extends AppCompatActivity {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 CollectionReference usersCollection = db.collection("users");
 
-                Usuario infosDependente = new Usuario();
+                Dependente infosDependente = new Dependente();
                 String cpf = binding.cpfCadastroDependente.getText().toString();
 
                 infosDependente.setNome(binding.nomeCadastroDependente.getText().toString());
