@@ -110,6 +110,7 @@ public class CadastroDependentes extends AppCompatActivity {
                                 Toast.makeText(this, "Dependente cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
                                 finish();
                                 voltarTelaDependentes();
+                                setupRecyclerView();
                             }).addOnFailureListener(e -> {
 
                             });

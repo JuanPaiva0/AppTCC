@@ -11,42 +11,33 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.apptcc.Model.Dependente;
 import com.example.apptcc.Model.Usuario;
 import com.example.apptcc.R;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import java.util.List;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
-    private List<Dependente> dependentesList;
+public class Adapter extends FirestoreRecyclerAdapter<Usuario, Adapter.MyViewHolder> {
 
-    public Adapter(List<Dependente> dependentesList){
-        this.dependentesList = dependentesList;
+    public Adapter(@NonNull FirestoreRecyclerOptions<Usuario> options) {
+        super(options);
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View itensLista = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_dependentes, parent, false);
-
-        return new MyViewHolder(itensLista);
+        View itemLista = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_dependentes, parent, false);
+        return new MyViewHolder(itemLista);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Dependente dependente = dependentesList.get(position);
-        holder.nome.setText(dependente.getNome() + " " + dependente.getSobrenome());
-        holder.cpf.setText(dependente.getCpf());
-        //holder.nome.setText(dependentesList.get(position).getNome());
-        //holder.cpf.setText(dependentesList.get(position).getCpf());
+    protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull Usuario model) {
+        String nomeCompleto = model.getNome() + " " + model.getSobrenome();
+        holder.nome.setText(nomeCompleto);
+        holder.cpf.setText(model.getCpf());
     }
 
-    @Override
-    public int getItemCount() {
-        return dependentesList.size();
-    }
-
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView nome;
-        TextView cpf;
+    public class MyViewHolder extends RecyclerView.ViewHolder{
+        TextView nome, cpf;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -54,11 +45,4 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
             cpf = itemView.findViewById(R.id.cpfDependente);
         }
     }
-
-    public void updateDados(List<Dependente> dependentes){
-        dependentesList.clear();
-        dependentesList.addAll(dependentes);
-        notifyDataSetChanged();
-    }
-
 }

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.apptcc.Model.Dependente;
+import com.example.apptcc.Model.Usuario;
 import com.example.apptcc.R;
 import com.example.apptcc.View.CadastroDependentes;
 import com.example.apptcc.View.Tela_buscarDependente;
@@ -27,8 +28,8 @@ public class TelaDependenteRecycler extends AppCompatActivity {
     private ActivityTelaDependenteRecyclerBinding binding;
     private RecyclerView recyclerView;
     private FirebaseFirestore db;
-    private FirebaseAuth auth;
     private Adapter adapter;
+    private FirebaseAuth auth;
     List<Dependente> dependentesList = new ArrayList<>();
 
     @Override
@@ -40,16 +41,13 @@ public class TelaDependenteRecycler extends AppCompatActivity {
         Dialog popup = new Dialog(this);
         popup.setContentView(R.layout.popup_dependente);
 
-        recyclerView = binding.recyclerViewDependentes;
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
-
-
-        verificarDependentes();
+        setupRecyclerView();
 
         binding.btnCadastrarDependente.setOnClickListener(view -> {
-            Button btnSim =  popup.findViewById(R.id.btnPopUpSim);
+            Button btnSim = popup.findViewById(R.id.btnPopUpSim);
             Button btnNao = popup.findViewById(R.id.btnPopUpNao);
             popup.show();
 
@@ -65,71 +63,47 @@ public class TelaDependenteRecycler extends AppCompatActivity {
         });
     }
 
-    public void verificarDependentes() {
-        CollectionReference collec = db.collection("users")
+    private void setupRecyclerView() {
+        CollectionReference ref = db.collection("users")
                 .document(auth.getCurrentUser().getUid())
                 .collection("dependentes");
+        Query query = ref.orderBy("nome");
 
-        Query query = collec;
-
-        FirestoreRecyclerOptions<Dependente> options = new FirestoreRecyclerOptions.Builder<Dependente>()
-                .setQuery(query, Dependente.class)
+        FirestoreRecyclerOptions<Usuario> options = new FirestoreRecyclerOptions.Builder<Usuario>()
+                .setQuery(query, Usuario.class)
                 .build();
 
-        adapter = new Adapter(options.getSnapshots());
+        recyclerView = binding.recyclerViewDependentes;
+
+        if (adapter != null) {
+            adapter.stopListening();
+        }
+
+        adapter = new Adapter(options);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+
+
+        adapter.startListening();
     }
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
+        adapter = null;
+    }
 
-
-//    public void verificarDependentes(){
-//        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        FirebaseUser user = auth.getCurrentUser();
-//
-//        if (user != null){
-//            CollectionReference collec = db.collection(user.getUid()).getFirestore().collection("dependentes");
-//
-//            collec.addSnapshotListener((value, error) -> {
-//             for (DocumentChange dc : value.getDocumentChanges()){
-//                 if (dc.getType() == DocumentChange.Type.ADDED){
-//                     dependentesList.add(dc.getDocument().toObject(Dependente.class));
-//                 }
-//             }
-//             adapter.updateDados(dependentesList);
-//            });
-//        }
-//    }
-
-//    public void verificarDependentes() {
-//        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        FirebaseUser user = auth.getCurrentUser();
-//
-//        if (user != null) {
-//            CollectionReference collec = db.collection("dependentes");
-//
-//            collec.get().addOnCompleteListener(task -> {
-//                if (task.isSuccessful()) {
-//                    List<Usuario> dependentesList = new ArrayList<>();
-//                    for (QueryDocumentSnapshot document : task.getResult()) {
-//                        Usuario dependentes = document.toObject(Usuario.class);
-//                        dependentesList.add(dependentes);
-//                    }
-//                    if (!dependentesList.isEmpty()) {
-//                        binding.txtSemDependentes.setVisibility(View.GONE);
-//                        adapter.updateDados(dependentesList);
-//
-//                    } else {
-//                        binding.recyclerViewDependentes.setVisibility(View.GONE);
-//                        binding.txtSemDependentes.setVisibility(View.VISIBLE);
-//                    }
-//                }
-//            });
-//        }
-//    }
 
     public void mudarTelaBuscaDependente(){
         Intent it_mudarTela = new Intent(this, Tela_buscarDependente.class);
