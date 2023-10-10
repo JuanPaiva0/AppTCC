@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,8 +23,6 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class TelaDependenteRecycler extends AppCompatActivity {
     private ActivityTelaDependenteRecyclerBinding binding;
@@ -33,7 +30,6 @@ public class TelaDependenteRecycler extends AppCompatActivity {
     private FirebaseFirestore db;
     private Adapter adapter;
     private FirebaseAuth auth;
-    List<Dependente> dependentesList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

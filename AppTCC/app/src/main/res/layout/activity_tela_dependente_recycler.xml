@@ -11,13 +11,15 @@
         android:id="@+id/recyclerViewDependentes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="95dp"
+        android:layout_marginTop="130dp"
         android:layout_marginBottom="70dp"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/btnCadastrarDependente"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/textView29"
+        app:layout_constraintVertical_bias="0.639" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -54,26 +56,41 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="#000"
-        />
+        app:strokeColor="#000" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/txtSemDependentes"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="30dp"-->
-<!--        android:layout_marginTop="70dp"-->
-<!--        android:layout_marginEnd="30dp"-->
-<!--        android:background="@drawable/format_btns_home"-->
-<!--        android:elevation="10dp"-->
-<!--        android:padding="10dp"-->
-<!--        android:text="@string/txtSemDependente"-->
-<!--        android:textColor="#000000"-->
-<!--        android:textSize="16sp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/textView11" />-->
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="40dp"
+        android:text="Para ter acesso as vacinas dos seus dependentes apenas clique no dependente desejado"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="15dp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/txtSemDependentes"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="30dp"-->
+    <!--        android:layout_marginTop="70dp"-->
+    <!--        android:layout_marginEnd="30dp"-->
+    <!--        android:background="@drawable/format_btns_home"-->
+    <!--        android:elevation="10dp"-->
+    <!--        android:padding="10dp"-->
+    <!--        android:text="@string/txtSemDependente"-->
+    <!--        android:textColor="#000000"-->
+    <!--        android:textSize="16sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/textView11" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

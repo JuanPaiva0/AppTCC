@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
     }
 
     //--------------------- Metodos para mudança de telas ----------------------------------------------

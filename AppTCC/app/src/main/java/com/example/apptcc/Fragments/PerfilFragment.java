@@ -153,6 +153,7 @@ public class PerfilFragment extends Fragment {
     public void mudarTelaLogin(){
         // Dentro do método de logout do seu fragment
         Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         getActivity().finish();
     }
