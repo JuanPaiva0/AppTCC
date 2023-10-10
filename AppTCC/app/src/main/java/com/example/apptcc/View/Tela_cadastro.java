@@ -89,16 +89,16 @@ public class Tela_cadastro extends AppCompatActivity {
                 usuario.setSobrenome(binding.sobreNomeCadastro.getText().toString().trim());
                 usuario.setEmail(binding.emailCadastro.getText().toString().trim());
                 usuario.setCpf(binding.cpfCadastro.getText().toString().trim());
+                usuario.setSenha(binding.senhaCadastro.getText().toString().trim());
 
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 db.collection("users").document(user.getUid()).set(usuario).addOnSuccessListener(aVoid ->{
-
+                    finish();
+                    mudarParaHome();
+                    Toast.makeText(this, "Usuário registrado com sucesso", Toast.LENGTH_SHORT).show();
                 }).addOnFailureListener(e ->{
 
                 });
-                mudarParaHome();
-                finish();
-                Toast.makeText(this, "Usuário registrado com sucesso", Toast.LENGTH_SHORT).show();
             } else{
 
                 String resposta = task.getException().toString();

@@ -100,7 +100,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//--------------------- Metodos para mudança de telas ----------------------------------------------
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    //--------------------- Metodos para mudança de telas ----------------------------------------------
 
     public void mudarParaHome(){
         Intent it_mudarTela =  new Intent(this, NavigationScreen.class);

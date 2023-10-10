@@ -1,13 +1,25 @@
 package com.example.apptcc.Model;
 
 public class Usuario {
-
     private String nome;
     private String sobrenome;
     private String email;
     private String senha;
     private String cpf;
 
+    public Usuario() {
+        // Construtor vazio necessário para o Firebase
+    }
+
+    public Usuario(String nome, String sobrenome, String email, String senha, String cpf) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.email = email;
+        this.senha = senha;
+        this.cpf = cpf;
+    }
+
+    // Getters e Setters
     public String getNome() {
         return nome;
     }

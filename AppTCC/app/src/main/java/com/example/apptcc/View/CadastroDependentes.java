@@ -101,6 +101,7 @@ public class CadastroDependentes extends AppCompatActivity {
                 infosDependente.setSobrenome(binding.sobreNomeCadastroDependente.getText().toString());
                 infosDependente.setEmail(binding.emailCadastroDependente.getText().toString());
                 infosDependente.setCpf(binding.cpfCadastroDependente.getText().toString());
+                infosDependente.setSenha(binding.senhaCadastroDependente.getText().toString());
 
                 usersCollection.document(dependente.getUid()).set(infosDependente).addOnSuccessListener(aVoid -> {
                     db.collection("users").document(usuarioResponsavel)
@@ -110,7 +111,6 @@ public class CadastroDependentes extends AppCompatActivity {
                                 Toast.makeText(this, "Dependente cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
                                 finish();
                                 voltarTelaDependentes();
-                                setupRecyclerView();
                             }).addOnFailureListener(e -> {
 
                             });

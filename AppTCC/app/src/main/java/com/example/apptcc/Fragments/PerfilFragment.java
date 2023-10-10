@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 
 import com.example.apptcc.Model.Usuario;
 import com.example.apptcc.R;
+import com.example.apptcc.View.MainActivity;
+import com.example.apptcc.View.Tela_ConfigPerfil;
 import com.example.apptcc.View.Tela_recuperarSenha;
 import com.example.apptcc.databinding.FragmentPerfilBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -93,9 +96,19 @@ public class PerfilFragment extends Fragment {
             }
         });
 
+
+        bindind.imgConfig.setOnClickListener(view2 -> {
+            mudarTelaConfig();
+        });
+
         bindind.txtPerfilRedefinirSenha.setOnClickListener(view1 -> {
             mudarParaTelaRdefinirSenha();
         });
+
+        bindind.btnLogout.setOnClickListener(view3 -> {
+            logout();
+        });
+
         return view;
     }
 
@@ -121,8 +134,26 @@ public class PerfilFragment extends Fragment {
         });
     }
 
+    public void logout(){
+        auth = FirebaseAuth.getInstance();
+        auth.signOut();
+        mudarTelaLogin();
+    }
+
     public void mudarParaTelaRdefinirSenha(){
         Intent it_TelaRedefinirSenha = new Intent(getActivity(), Tela_recuperarSenha.class);
         startActivity(it_TelaRedefinirSenha);
+    }
+
+    public void mudarTelaConfig(){
+        Intent it_mudarTela = new Intent(getActivity(), Tela_ConfigPerfil.class);
+        startActivity(it_mudarTela);
+    }
+
+    public void mudarTelaLogin(){
+        // Dentro do método de logout do seu fragment
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        startActivity(intent);
+        getActivity().finish();
     }
 }
