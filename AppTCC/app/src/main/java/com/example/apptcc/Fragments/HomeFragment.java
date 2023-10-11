@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.apptcc.Model.Usuario;
 import com.example.apptcc.R;
 import com.example.apptcc.RecyclerView.TelaDependenteRecycler;
+import com.example.apptcc.View.Tela_cadastroVacinas;
 import com.example.apptcc.databinding.FragmentHomeBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -98,6 +99,10 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        binding.btnHomeAdicionarVacina.setOnClickListener(view1 -> {
+            mudarTelaCadastroVacinas();
+        });
+
         return view;
     }
 
@@ -123,5 +128,10 @@ public class HomeFragment extends Fragment {
     public void mudarTelaDependentes(){
         Intent it_mudarTela = new Intent(getActivity(), TelaDependenteRecycler.class);
         startActivity(it_mudarTela);
+    }
+
+    public void mudarTelaCadastroVacinas(){
+        Intent it = new Intent(getActivity(), Tela_cadastroVacinas.class);
+        startActivity(it);
     }
 }
