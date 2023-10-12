@@ -28,7 +28,7 @@ public class TelaDependenteRecycler extends AppCompatActivity {
     private ActivityTelaDependenteRecyclerBinding binding;
     private RecyclerView recyclerView;
     private FirebaseFirestore db;
-    private Adapter adapter;
+    private AdapterDependentes adapterDependentes;
     private FirebaseAuth auth;
 
     @Override
@@ -45,7 +45,7 @@ public class TelaDependenteRecycler extends AppCompatActivity {
 
         setupRecyclerView();
 
-        adapter.setOnItemClickListener(dependente -> OnItemClick(dependente));
+        adapterDependentes.setOnItemClickListener(dependente -> OnItemClick(dependente));
 
         binding.btnCadastrarDependente.setOnClickListener(view -> {
             Button btnSim = popup.findViewById(R.id.btnPopUpSim);
@@ -76,33 +76,33 @@ public class TelaDependenteRecycler extends AppCompatActivity {
 
         recyclerView = binding.recyclerViewDependentes;
 
-        if (adapter != null) {
-            adapter.stopListening();
+        if (adapterDependentes != null) {
+            adapterDependentes.stopListening();
         }
 
-        adapter = new Adapter(options);
+        adapterDependentes = new AdapterDependentes(options);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapterDependentes);
 
 
-        adapter.startListening();
+        adapterDependentes.startListening();
     }
 
 
     @Override
     protected void onStart() {
         super.onStart();
-        adapter.startListening();
+        adapterDependentes.startListening();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        adapter.stopListening();
-        adapter = null;
+        adapterDependentes.stopListening();
+        adapterDependentes = null;
     }
 
     public void OnItemClick(Usuario dependente){

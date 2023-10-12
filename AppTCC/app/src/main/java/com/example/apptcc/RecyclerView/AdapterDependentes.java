@@ -13,7 +13,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Adapter extends FirestoreRecyclerAdapter<Usuario, Adapter.MyViewHolder> {
+public class AdapterDependentes extends FirestoreRecyclerAdapter<Usuario, AdapterDependentes.MyViewHolder> {
 
     private FirebaseAuth auth;
     private Usuario dependente;
@@ -36,7 +36,7 @@ public class Adapter extends FirestoreRecyclerAdapter<Usuario, Adapter.MyViewHol
         this.listener = listener;
     }
 
-    public Adapter(@NonNull FirestoreRecyclerOptions<Usuario> options) {
+    public AdapterDependentes(@NonNull FirestoreRecyclerOptions<Usuario> options) {
         super(options);
     }
 

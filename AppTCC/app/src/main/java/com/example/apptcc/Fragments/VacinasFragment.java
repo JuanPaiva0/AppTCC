@@ -3,12 +3,22 @@ package com.example.apptcc.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.apptcc.Model.Vacinas;
 import com.example.apptcc.R;
+import com.example.apptcc.databinding.FragmentVacinasBinding;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +26,12 @@ import com.example.apptcc.R;
  * create an instance of this fragment.
  */
 public class VacinasFragment extends Fragment {
+
+    private FragmentVacinasBinding binding;
+    private RecyclerView recyclerView;
+    private AdapterVacinas adapterVacinas;
+    private FirebaseAuth auth;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,6 +67,7 @@ public class VacinasFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        auth = FirebaseAuth.getInstance();
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -60,7 +77,34 @@ public class VacinasFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_vacinas, container, false);
+        binding = FragmentVacinasBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+
+
+        setupRecycler();
+
+        return view;
+    }
+
+    public void setupRecycler(){
+        CollectionReference ref = db.collection("users")
+                .document(auth.getCurrentUser().getUid())
+                .collection("vacinas");
+        Query query = ref.orderBy("nome");
+
+        FirestoreRecyclerOptions<Vacinas> options = new FirestoreRecyclerOptions.Builder<Vacinas>()
+                .setQuery(query, Vacinas.class)
+                .build();
+
+        recyclerView = binding.recyclerVacinas;
+
+        adapterVacinas = new AdapterVacinas(options);
+
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapterVacinas);
+
+        adapterVacinas.startListening();
     }
 }
