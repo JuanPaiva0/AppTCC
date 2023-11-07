@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class Tela_cadastro extends AppCompatActivity {
+public class Tela_CadastroUsuario extends AppCompatActivity {
 
     TextView link;
     private ActivityTelaCadastroBinding binding;
@@ -47,6 +47,7 @@ public class Tela_cadastro extends AppCompatActivity {
     }
 
     public void validaCampos(){
+        //Coleta de dados para a validação dos campos
         String nome = binding.NomeCadastro.getText().toString().trim();
         String sobreNome = binding.sobreNomeCadastro.getText().toString().trim();
         String email = binding.emailCadastro.getText().toString().trim();
@@ -58,6 +59,7 @@ public class Tela_cadastro extends AppCompatActivity {
                 if (!email.isEmpty()){
                     if (!senha.isEmpty()){
                         if (!cpf.isEmpty()){
+                            //Após a validação seguir para a validação do CPF
                             validaCpf(cpf);
                         } else {
                             Toast.makeText(this, "Informe seu cpf", Toast.LENGTH_SHORT).show();
@@ -77,12 +79,15 @@ public class Tela_cadastro extends AppCompatActivity {
     }
 
     public void criarConta(String email, String senha){
+        //Realizar a criação do login do usuário através do método nativo do firebase
         auth.createUserWithEmailAndPassword(
                 email, senha
         ).addOnCompleteListener(task ->{
             if (task.isSuccessful()){
+                //Após a tarefa estar completa criar variável para ter acesso as informações do usuário
                 FirebaseUser user = auth.getCurrentUser();
 
+                //Criar um objeto e inserir todas as informações do usuário
                 Usuario usuario = new Usuario();
 
                 usuario.setNome(binding.NomeCadastro.getText().toString().trim());
@@ -91,16 +96,16 @@ public class Tela_cadastro extends AppCompatActivity {
                 usuario.setCpf(binding.cpfCadastro.getText().toString().trim());
                 usuario.setSenha(binding.senhaCadastro.getText().toString().trim());
 
+                //Após isso inserir todas as informações no banco de dados
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 db.collection("users").document(user.getUid()).set(usuario).addOnSuccessListener(aVoid ->{
                     finish();
                     mudarParaHome();
                     Toast.makeText(this, "Usuário registrado com sucesso", Toast.LENGTH_SHORT).show();
-                }).addOnFailureListener(e ->{
+                }).addOnFailureListener(e -> {
 
                 });
             } else{
-
                 String resposta = task.getException().toString();
                 opcoesErro(resposta);
                 Log.e("Registro", "Falha ao registrar usuário", task.getException());
@@ -109,9 +114,11 @@ public class Tela_cadastro extends AppCompatActivity {
     }
 
     public void validaCpf(String cpf){
+        //Instanciat o banco de dados e definir qual será a coleção de referência
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference ref = db.collection("users");
 
+        //Verificar no banco de dados se já existe um documento com o CPF informado
         ref.whereEqualTo("cpf", cpf).get().addOnCompleteListener(task -> {
            if (task.isSuccessful() && !task.getResult().isEmpty()){
                //o CPF já esta cadastrado
@@ -124,6 +131,7 @@ public class Tela_cadastro extends AppCompatActivity {
         });
     }
 
+    //Método responsável pelo tratamento dos erro, para facilitar o a navegação do usuário
     public void opcoesErro(String resposta){
         if(resposta.contains("The email address is badly formatted")){
             Toast.makeText(this, "Email inválido", Toast.LENGTH_SHORT).show();
@@ -134,15 +142,14 @@ public class Tela_cadastro extends AppCompatActivity {
         }
     }
 
+    //--------------------- Metodos para mudança de telas ------------------------------------------
     public void mudarParaHome(){
         Intent it_mudarTela = new Intent(this, NavigationScreen.class);
         startActivity(it_mudarTela);
     }
 
-
     public void mudarParaTelaDeLogin(){
-       Intent it_mudarTela = new Intent(this, MainActivity.class);
+       Intent it_mudarTela = new Intent(this, Tela_Login.class);
         startActivity(it_mudarTela);
     }
-
 }

@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.example.apptcc.Model.Usuario;
 import com.example.apptcc.R;
-import com.example.apptcc.RecyclerView.TelaDependenteRecycler;
-import com.example.apptcc.View.Tela_cadastroVacinas;
+import com.example.apptcc.RecyclerView.Tela_DependenteRecycler;
+import com.example.apptcc.View.Tela_CadastroVacinas;
 import com.example.apptcc.databinding.FragmentHomeBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -106,15 +106,20 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    //Interface que serve como mecanismo para fornecer uma função de retorno que só é invocada
+    //quando os dados forem buscado corretamente
     public interface nomeCallback {
         void nomeUsuario(String nome);
     }
 
 
     public void buscarNomeUsuario(nomeCallback callback){
+        //Definir a coleção de referência
         CollectionReference collec = db.collection("users");
         FirebaseUser user = auth.getCurrentUser();
 
+        //Fazer uma pesquisa no banco com o ID do usuário que esta logado atualmete e buscar somente
+        //seu primeiro nome
         collec.document(user.getUid()).get().addOnCompleteListener(task -> {
            if(task.isSuccessful()){
                DocumentSnapshot document = task.getResult();
@@ -125,13 +130,14 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    //--------------------- Metodos para mudança de telas ------------------------------------------
     public void mudarTelaDependentes(){
-        Intent it_mudarTela = new Intent(getActivity(), TelaDependenteRecycler.class);
+        Intent it_mudarTela = new Intent(getActivity(), Tela_DependenteRecycler.class);
         startActivity(it_mudarTela);
     }
 
     public void mudarTelaCadastroVacinas(){
-        Intent it = new Intent(getActivity(), Tela_cadastroVacinas.class);
+        Intent it = new Intent(getActivity(), Tela_CadastroVacinas.class);
         startActivity(it);
     }
 }

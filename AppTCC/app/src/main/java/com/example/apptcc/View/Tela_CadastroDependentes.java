@@ -7,19 +7,14 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.apptcc.Model.Dependente;
-import com.example.apptcc.Model.Usuario;
-import com.example.apptcc.R;
-import com.example.apptcc.RecyclerView.TelaDependenteRecycler;
+import com.example.apptcc.RecyclerView.Tela_DependenteRecycler;
 import com.example.apptcc.databinding.ActivityCadastroDependentesBinding;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
-public class CadastroDependentes extends AppCompatActivity {
+public class Tela_CadastroDependentes extends AppCompatActivity {
     private ActivityCadastroDependentesBinding binding;
     private FirebaseAuth auth;
     private FirebaseFirestore db;
@@ -39,6 +34,7 @@ public class CadastroDependentes extends AppCompatActivity {
     }
 
     public void validaCampos(){
+        //Coleta de dados para a validação dos campos
         String nome = binding.nomeCadastroDependente.getText().toString().trim();
         String sobrenome = binding.sobreNomeCadastroDependente.getText().toString().trim();
         String email = binding.emailCadastroDependente.getText().toString().trim();
@@ -50,6 +46,7 @@ public class CadastroDependentes extends AppCompatActivity {
                 if (!email.isEmpty()){
                     if (!senha.isEmpty()){
                         if (!cpf.isEmpty()){
+                            //Após a validação dos campos seguir para o método de validação de CPF
                             validaCpf(cpf);
                         } else {
                             Toast.makeText(this, "Informe o cpf do dependente", Toast.LENGTH_SHORT).show();
@@ -69,14 +66,20 @@ public class CadastroDependentes extends AppCompatActivity {
     }
 
     public void validaCpf(String cpf){
+        //Fazer a instancia do Firebase Firestore e definir a coleção de referência
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference ref = db.collection("users");
 
+        //Fazer uma busca no banco de dados para verificar se o cpf informado está cadastrado
         ref.whereEqualTo("cpf", cpf).get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && !task.getResult().isEmpty()){
-                //o CPF já esta cadastrado
+
+                //Caso o CPF já esteja cadastrado, mostrar uma menssagem na tela do usuário informado
+                //que esse CPF já está cadastrado
                 Toast.makeText(this, "Esse cpf já esta cadastrado", Toast.LENGTH_SHORT).show();
             } else {
+                //Caso o CPF não esteja na coleção de usuários, coletar o email e senha para, realizar
+                //o método de cadastro
                 String email = binding.emailCadastroDependente.getText().toString().trim();
                 String senha = binding.senhaCadastroDependente.getText().toString().trim();
                 cadastrarDependente(email, senha);
@@ -125,7 +128,7 @@ public class CadastroDependentes extends AppCompatActivity {
     }
 
     public void voltarTelaDependentes(){
-        Intent it_mudarTela = new Intent(this, TelaDependenteRecycler.class);
+        Intent it_mudarTela = new Intent(this, Tela_DependenteRecycler.class);
         startActivity(it_mudarTela);
     }
 

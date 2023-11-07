@@ -1,7 +1,5 @@
 package com.example.apptcc.View;
 
-import static androidx.fragment.app.FragmentManager.TAG;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,15 +8,12 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.apptcc.Model.Vacinas;
-import com.example.apptcc.R;
 import com.example.apptcc.databinding.ActivityTelaCadastroVacinasBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.net.Inet4Address;
-
-public class Tela_cadastroVacinas extends AppCompatActivity {
+public class Tela_CadastroVacinas extends AppCompatActivity {
     private ActivityTelaCadastroVacinasBinding binding;
     private FirebaseAuth auth;
 

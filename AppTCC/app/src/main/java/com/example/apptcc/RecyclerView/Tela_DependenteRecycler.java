@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.apptcc.Model.Dependente;
 import com.example.apptcc.Model.Usuario;
 import com.example.apptcc.R;
-import com.example.apptcc.View.CadastroDependentes;
+import com.example.apptcc.View.Tela_CadastroDependentes;
 import com.example.apptcc.View.NavigationScreen;
-import com.example.apptcc.View.Tela_buscarDependente;
+import com.example.apptcc.View.Tela_BuscarDependente;
 import com.example.apptcc.databinding.ActivityTelaDependenteRecyclerBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,7 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 
-public class TelaDependenteRecycler extends AppCompatActivity {
+public class Tela_DependenteRecycler extends AppCompatActivity {
     private ActivityTelaDependenteRecyclerBinding binding;
     private RecyclerView recyclerView;
     private FirebaseFirestore db;
@@ -87,22 +87,23 @@ public class TelaDependenteRecycler extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapterDependentes);
 
-
         adapterDependentes.startListening();
     }
-
 
     @Override
     protected void onStart() {
         super.onStart();
-        adapterDependentes.startListening();
+        if (adapterDependentes != null) {
+            adapterDependentes.startListening();
+        }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        adapterDependentes.stopListening();
-        adapterDependentes = null;
+        if (adapterDependentes != null) {
+            adapterDependentes.stopListening();
+        }
     }
 
     public void OnItemClick(Usuario dependente){
@@ -113,7 +114,6 @@ public class TelaDependenteRecycler extends AppCompatActivity {
                 collection("dependentes");
 
         String cpfDependente = dependente.getCpf();
-
 
         ref.whereEqualTo("cpf", cpfDependente).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -141,14 +141,14 @@ public class TelaDependenteRecycler extends AppCompatActivity {
 
     }
 
-
+    //--------------------- Metodos para mudança de telas ------------------------------------------
     public void mudarTelaBuscaDependente(){
-        Intent it_mudarTela = new Intent(this, Tela_buscarDependente.class);
+        Intent it_mudarTela = new Intent(this, Tela_BuscarDependente.class);
         startActivity(it_mudarTela);
     }
 
     public void mudarTelaCadastarDependente(){
-        Intent it_mudarTela = new Intent(this, CadastroDependentes.class);
+        Intent it_mudarTela = new Intent(this, Tela_CadastroDependentes.class);
         startActivity(it_mudarTela);
     }
 

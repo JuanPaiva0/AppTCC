@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cor5"
-    tools:context=".View.Tela_buscarDependente">
+    tools:context=".View.Tela_BuscarDependente">
 
     <ImageView
         android:id="@+id/imageView"

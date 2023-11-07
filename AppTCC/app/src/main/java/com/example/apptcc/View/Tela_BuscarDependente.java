@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.example.apptcc.Model.Dependente;
 import com.example.apptcc.Model.Usuario;
 import com.example.apptcc.R;
-import com.example.apptcc.RecyclerView.TelaDependenteRecycler;
+import com.example.apptcc.RecyclerView.Tela_DependenteRecycler;
 import com.example.apptcc.databinding.ActivityTelaBuscarDependenteBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,7 +22,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class Tela_buscarDependente extends AppCompatActivity {
+public class Tela_BuscarDependente extends AppCompatActivity {
     private ActivityTelaBuscarDependenteBinding binding;
     private FirebaseAuth auth;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -46,9 +46,12 @@ public class Tela_buscarDependente extends AppCompatActivity {
             buscaDependente(new infosCallback() {
                 @Override
                 public void infosUsuarios(String nome, String sobrenome, String cpf) {
-
-                    txtNome.setText(nome + " " + sobrenome);
-                    txtCpf.setText(cpf);
+                    if (nome.isEmpty() && sobrenome.isEmpty()){
+                        txtNome.setText("Usuario não encontrado");
+                    } else {
+                        txtNome.setText(nome + " " + sobrenome);
+                        txtCpf.setText(cpf);
+                    }
                 }
             });
 
@@ -129,6 +132,7 @@ public class Tela_buscarDependente extends AppCompatActivity {
                                         dependente.setSobrenome(documentos.getString("sobrenome"));
                                         dependente.setEmail(documentos.getString("email"));
                                         dependente.setCpf(documentos.getString("cpf"));
+                                        dependente.setSenha(documentos.getString("senha"));
 
                                         db.collection("users").document(user.getUid())
                                                 .collection("dependentes")
@@ -150,7 +154,7 @@ public class Tela_buscarDependente extends AppCompatActivity {
     }
 
     public void voltarTelaDependentes(){
-        Intent it_mudarTela = new Intent(this, TelaDependenteRecycler.class);
+        Intent it_mudarTela = new Intent(this, Tela_DependenteRecycler.class);
         startActivity(it_mudarTela);
     }
 }

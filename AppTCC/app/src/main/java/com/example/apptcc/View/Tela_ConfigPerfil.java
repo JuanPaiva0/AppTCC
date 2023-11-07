@@ -21,10 +21,19 @@ public class Tela_ConfigPerfil extends AppCompatActivity {
             mudarTelaExclusaoDependente();
         });
 
+        binding.txtExcluirUsuario.setOnClickListener(view1 -> {
+            mudarTelaExclusaoUsuario();
+        });
+
     }
 
     public void mudarTelaExclusaoDependente(){
         Intent it = new Intent(this, Tela_ExclusaoDependente.class);
+        startActivity(it);
+    }
+
+    public void mudarTelaExclusaoUsuario(){
+        Intent it = new Intent(this, Tela_ExclusaoUsuario.class);
         startActivity(it);
     }
 }

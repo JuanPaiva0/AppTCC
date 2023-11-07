@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,17 +12,14 @@ import android.widget.TextView;
 
 import com.example.apptcc.Model.Usuario;
 import com.example.apptcc.R;
-import com.example.apptcc.View.MainActivity;
+import com.example.apptcc.View.Tela_Login;
 import com.example.apptcc.View.Tela_ConfigPerfil;
-import com.example.apptcc.View.Tela_recuperarSenha;
-import com.example.apptcc.databinding.FragmentPerfilBinding;
+import com.example.apptcc.View.Tela_RecuperarSenha;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import javax.security.auth.callback.Callback;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -141,7 +137,7 @@ public class PerfilFragment extends Fragment {
     }
 
     public void mudarParaTelaRdefinirSenha(){
-        Intent it_TelaRedefinirSenha = new Intent(getActivity(), Tela_recuperarSenha.class);
+        Intent it_TelaRedefinirSenha = new Intent(getActivity(), Tela_RecuperarSenha.class);
         startActivity(it_TelaRedefinirSenha);
     }
 
@@ -152,7 +148,7 @@ public class PerfilFragment extends Fragment {
 
     public void mudarTelaLogin(){
         // Dentro do método de logout do seu fragment
-        Intent intent = new Intent(getActivity(), MainActivity.class);
+        Intent intent = new Intent(getActivity(), Tela_Login.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         getActivity().finish();
