@@ -24,7 +24,7 @@ public class AdapterDependentes extends FirestoreRecyclerAdapter<Usuario, Adapte
     }
 
     public void onItemClick(int position) {
-        if (listener != null) {
+        if (position < getItemCount()) {
             Usuario dependente = getItem(position);
             if (dependente != null) {
                 listener.onItemClick(dependente);

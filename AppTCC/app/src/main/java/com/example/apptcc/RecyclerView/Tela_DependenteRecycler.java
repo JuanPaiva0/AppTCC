@@ -54,11 +54,13 @@ public class Tela_DependenteRecycler extends AppCompatActivity {
 
             btnSim.setOnClickListener(view1 -> {
                 popup.dismiss();
+                finish();
                 mudarTelaBuscaDependente();
             });
 
             btnNao.setOnClickListener(view2 -> {
                 popup.dismiss();
+                finish();
                 mudarTelaCadastarDependente();
             });
         });

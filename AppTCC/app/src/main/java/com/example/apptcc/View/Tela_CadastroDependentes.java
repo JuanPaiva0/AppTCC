@@ -33,6 +33,13 @@ public class Tela_CadastroDependentes extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        voltarTelaDependentes();
+    }
+
     public void validaCampos(){
         //Coleta de dados para a validação dos campos
         String nome = binding.nomeCadastroDependente.getText().toString().trim();

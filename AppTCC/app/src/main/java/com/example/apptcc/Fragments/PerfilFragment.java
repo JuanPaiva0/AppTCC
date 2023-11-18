@@ -15,6 +15,7 @@ import com.example.apptcc.R;
 import com.example.apptcc.View.Tela_Login;
 import com.example.apptcc.View.Tela_ConfigPerfil;
 import com.example.apptcc.View.Tela_RecuperarSenha;
+import com.example.apptcc.databinding.FragmentPerfilBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;

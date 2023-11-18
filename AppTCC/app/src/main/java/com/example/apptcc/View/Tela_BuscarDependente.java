@@ -71,6 +71,13 @@ public class Tela_BuscarDependente extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        voltarTelaDependentes();
+    }
+
     public interface infosCallback{
         void infosUsuarios(String nome, String sobrenome, String cpf);
     }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.apptcc.API.Tela_EscolhasVacinas;
 import com.example.apptcc.Model.Usuario;
 import com.example.apptcc.R;
 import com.example.apptcc.RecyclerView.Tela_DependenteRecycler;
@@ -103,6 +104,10 @@ public class HomeFragment extends Fragment {
             mudarTelaCadastroVacinas();
         });
 
+        binding.btnHomeCalendario.setOnClickListener(view2 ->{
+            mudarTelaCalendario();
+        });
+
         return view;
     }
 
@@ -138,6 +143,11 @@ public class HomeFragment extends Fragment {
 
     public void mudarTelaCadastroVacinas(){
         Intent it = new Intent(getActivity(), Tela_CadastroVacinas.class);
+        startActivity(it);
+    }
+
+    public void mudarTelaCalendario(){
+        Intent it = new Intent(getActivity(), Tela_EscolhasVacinas.class);
         startActivity(it);
     }
 }
