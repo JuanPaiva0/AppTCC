@@ -3,6 +3,7 @@ package com.example.apptcc.API;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,14 +11,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.apptcc.Model.VacinasAPI;
 import com.example.apptcc.R;
+import com.example.apptcc.RecyclerView.AdapterDependentes;
 
 import java.util.List;
 
 public class Adapter_ListaVacina extends RecyclerView.Adapter<Adapter_ListaVacina.MyViewHolder> {
 
-    private List<String> vacinasList;
+    private List<VacinasAPI> vacinasList;
+    private OnItemClickListener listener;
 
-    public Adapter_ListaVacina(List<String> vacinasList) {
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+
+    public Adapter_ListaVacina(List<VacinasAPI> vacinasList) {
         this.vacinasList = vacinasList;
     }
 
@@ -32,8 +44,17 @@ public class Adapter_ListaVacina extends RecyclerView.Adapter<Adapter_ListaVacin
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        String nomeVacina = vacinasList.get(position);
-        holder.nomeVacina.setText(nomeVacina);
+        VacinasAPI vacina = vacinasList.get(position);
+        holder.nomeVacina.setText(vacina.getNome_vacina());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onItemClick(holder.getPosition());
+                }
+            }
+        });
     }
 
     @Override
