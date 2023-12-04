@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -38,7 +39,6 @@ public class Tela_BuscarDependente extends AppCompatActivity {
 
 
         binding.btnBuscarDependente.setOnClickListener(view -> {
-            popup.show();
             TextView txtNome = popup.findViewById(R.id.txtNomeDependente);
             TextView txtCpf = popup.findViewById(R.id.txtCpfDependente);
             Button btnMudarCpf = popup.findViewById(R.id.btnPopUpMudarCpf);
@@ -46,9 +46,16 @@ public class Tela_BuscarDependente extends AppCompatActivity {
             buscaDependente(new infosCallback() {
                 @Override
                 public void infosUsuarios(String nome, String sobrenome, String cpf) {
-                    if (nome.isEmpty() && sobrenome.isEmpty()){
-                        txtNome.setText("Usuario não encontrado");
+
+                    Log.d("infosUsuarios", "nome: " + nome);
+                    Log.d("infosUsuarios", "sobrenome: " + sobrenome);
+                    Log.d("infosUsuarios", "cpf: " + cpf);
+
+                    if (nome == null || sobrenome == null || cpf == null) {
+                        dependenteNaoEncontrado();
+                        popup.dismiss();
                     } else {
+                        popup.show();
                         txtNome.setText(nome + " " + sobrenome);
                         txtCpf.setText(cpf);
                     }
@@ -97,8 +104,13 @@ public class Tela_BuscarDependente extends AppCompatActivity {
                     String nome = document.getString("nome");
                     String sobrenome = document.getString("sobrenome");
                     String userCpf = document.getString("cpf");
+                    Log.d("buscaDependente", "nome: " + nome);
+                    Log.d("buscaDependente", "sobrenome: " + sobrenome);
+                    Log.d("buscaDependente", "cpf: " + userCpf);
 
                     callback.infosUsuarios(nome, sobrenome, userCpf);
+                } else {
+                    callback.infosUsuarios(null, null, null);
                 }
             }
         });
@@ -147,7 +159,6 @@ public class Tela_BuscarDependente extends AppCompatActivity {
                                                     finish();
                                                     voltarTelaDependentes();
                                                 }).addOnFailureListener(e -> {
-
                                                 });
                                     }
                                 }
@@ -160,6 +171,13 @@ public class Tela_BuscarDependente extends AppCompatActivity {
 
     }
 
+    public void dependenteNaoEncontrado(){
+        Dialog popup = new Dialog(this);
+        popup.setContentView(R.layout.popup_dependente_nao_encontrado);
+        popup.show();
+    }
+    
+    //--------------------- Metodos para mudança de telas ------------------------------------------
     public void voltarTelaDependentes(){
         Intent it_mudarTela = new Intent(this, Tela_DependenteRecycler.class);
         startActivity(it_mudarTela);

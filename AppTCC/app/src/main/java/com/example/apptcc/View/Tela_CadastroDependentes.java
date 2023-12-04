@@ -40,6 +40,7 @@ public class Tela_CadastroDependentes extends AppCompatActivity {
         voltarTelaDependentes();
     }
 
+    //Método para a validação dos campos
     public void validaCampos(){
         //Coleta de dados para a validação dos campos
         String nome = binding.nomeCadastroDependente.getText().toString().trim();
@@ -72,6 +73,7 @@ public class Tela_CadastroDependentes extends AppCompatActivity {
         }
     }
 
+    //Método para a validação de CPF do dependente
     public void validaCpf(String cpf){
         //Fazer a instancia do Firebase Firestore e definir a coleção de referência
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -94,10 +96,12 @@ public class Tela_CadastroDependentes extends AppCompatActivity {
         });
     }
 
+    //Método para cadastro do dependente
     private void cadastrarDependente(String email, String senha) {
-
+        //Coleta do ID do usuário que está logado atualmente
         String usuarioResponsavel = auth.getCurrentUser().getUid();
 
+        //Cria um novo usuário a partir das informações coletadas
         auth.createUserWithEmailAndPassword(email, senha).addOnCompleteListener(task -> {
             if (task.isSuccessful()){
                 FirebaseUser dependente = auth.getCurrentUser();
@@ -134,11 +138,6 @@ public class Tela_CadastroDependentes extends AppCompatActivity {
         });
     }
 
-    public void voltarTelaDependentes(){
-        Intent it_mudarTela = new Intent(this, Tela_DependenteRecycler.class);
-        startActivity(it_mudarTela);
-    }
-
     public void opcoesErro(String resposta){
         if(resposta.contains("The email address is badly formatted")){
             Toast.makeText(this, "Email inválido", Toast.LENGTH_SHORT).show();
@@ -149,4 +148,9 @@ public class Tela_CadastroDependentes extends AppCompatActivity {
         }
     }
 
+    //--------------------- Metodos para mudança de telas ------------------------------------------
+    public void voltarTelaDependentes(){
+        Intent it_mudarTela = new Intent(this, Tela_DependenteRecycler.class);
+        startActivity(it_mudarTela);
+    }
 }

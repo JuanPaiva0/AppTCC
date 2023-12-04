@@ -33,6 +33,7 @@ public class Tela_ExclusaoUsuario extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference ref = db.collection("users");
 
+        //Método nativo do firebase para a exclusão de documento
         db.collection("users").document(auth.getCurrentUser().getUid()).delete()
                 .addOnSuccessListener(task -> {
                     Toast.makeText(this, "Usuário excluido com sucesso", Toast.LENGTH_SHORT).show();
@@ -44,6 +45,7 @@ public class Tela_ExclusaoUsuario extends AppCompatActivity {
                 });
     }
 
+    //--------------------- Metodos para mudança de telas ------------------------------------------
     public void mudatTelaLogin(){
         Intent it = new Intent(this, Tela_Login.class);
         startActivity(it);

@@ -29,11 +29,13 @@ public class Tela_ExclusaoDependente extends AppCompatActivity {
         binding = ActivityTelaExclusaoDependenteBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         auth = FirebaseAuth.getInstance();
+        //Instância do poppup
         Dialog popup = new Dialog(this);
         popup.setContentView(R.layout.popup_exclusao_dependentes);
 
         binding.btnExclusaoBusca.setOnClickListener(view -> {
             popup.show();
+            //Instância dos campos do poppup
             TextView txtNome = popup.findViewById(R.id.txtExclusaoNome);
             TextView txtCpf = popup.findViewById(R.id.txtExclusaoCpf);
             Button btnExcluir = popup.findViewById(R.id.btnExcluirDependente);
@@ -63,14 +65,17 @@ public class Tela_ExclusaoDependente extends AppCompatActivity {
     }
 
 
+    //Método para a busca de dependente
     public void buscaDependente(Tela_ExclusaoDependente.infosCallback callback){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        //Especificação da coleção de referência
         CollectionReference collec = db.collection("users")
                 .document(auth.getCurrentUser().getUid())
                 .collection("dependentes");
 
         String cpf = binding.txtExclusaoBusca.getText().toString().trim();
 
+        //Método nativo do firebase para a busca de documento
         collec.whereEqualTo("cpf", cpf).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 QuerySnapshot documents = task.getResult();
@@ -86,20 +91,24 @@ public class Tela_ExclusaoDependente extends AppCompatActivity {
         });
     }
 
+    //Método para a exclusão de dependente
     public void exclusaoDependente(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        //Especificação da coleção de referência
         CollectionReference ref = db.collection("users")
                 .document(auth.getCurrentUser().getUid())
                 .collection("dependentes");
 
         String cpf = binding.txtExclusaoBusca.getText().toString().trim();
 
+        //Método nativo do firebase para a busca de documento
         ref.whereEqualTo("cpf", cpf).get().addOnCompleteListener(task -> {
            if (task.isSuccessful()){
             QuerySnapshot documents = task.getResult();
             if (!documents.isEmpty()){
                 DocumentSnapshot document = task.getResult().getDocuments().get(0);
 
+                //Após sucesso em todas as condições é coletado o ID do dependente para a sua exclusão
                 String idDependente = document.getId();
                 ref.document(idDependente).delete().addOnCompleteListener(aVoid -> {
                     mudarTelaHome();
@@ -118,6 +127,7 @@ public class Tela_ExclusaoDependente extends AppCompatActivity {
         });
     }
 
+    //--------------------- Metodos para mudança de telas ------------------------------------------
     public void mudarTelaHome(){
         Intent it = new Intent(this, NavigationScreen.class);
         startActivity(it);

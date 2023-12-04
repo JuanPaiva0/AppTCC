@@ -29,18 +29,22 @@ public class Tela_CadastroVacinas extends AppCompatActivity {
         });
     }
 
+    //Método para adicionar vacina
     public void adicionarVacina(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference ref = db.collection("users")
                 .document(auth.getCurrentUser().getUid())
                 .collection("vacinas");
 
+        //Instância da classe de vacina
         Vacinas vacinas = new Vacinas();
 
+        //Coleta das informações
         vacinas.setNome(binding.txtCadastroNomeVacina.getText().toString());
         vacinas.setLote(binding.txtCadastroLoteVacina.getText().toString().toUpperCase());
         vacinas.setData(binding.txtCadastroDataVacina.getText().toString());
 
+        //Adição da vacina
         ref.add(vacinas).addOnCompleteListener(task -> {
             mudarTelaHome();
             Toast.makeText(this, "Vacina incluida com sucesso", Toast.LENGTH_SHORT).show();
@@ -49,6 +53,7 @@ public class Tela_CadastroVacinas extends AppCompatActivity {
         });
     }
 
+    //--------------------- Metodos para mudança de telas ------------------------------------------
     public void mudarTelaHome(){
         Intent it = new Intent(this, NavigationScreen.class);
         startActivity(it);
