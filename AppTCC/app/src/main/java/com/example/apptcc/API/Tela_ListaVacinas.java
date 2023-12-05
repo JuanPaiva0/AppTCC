@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.apptcc.Model.VacinasAPI;
@@ -243,6 +244,7 @@ public class Tela_ListaVacinas extends AppCompatActivity {
         Dialog popup = new Dialog(Tela_ListaVacinas.this);
         popup.setContentView(R.layout.popup_infos_vacinas);
         TextView btnVoltar = popup.findViewById(R.id.btn_popupVoltar);
+        ImageView btnVolta = popup.findViewById(R.id.btn_popupVoltar1);
 
         if (vacina.getProtecao_contra() != null) {
             TextView nomeVacina = popup.findViewById(R.id.txtInfos_NomeVacina);
@@ -263,6 +265,9 @@ public class Tela_ListaVacinas extends AppCompatActivity {
         popup.show();
 
         btnVoltar.setOnClickListener(view -> {
+            popup.dismiss();
+        });
+        btnVolta.setOnClickListener(view1 -> {
             popup.dismiss();
         });
     }

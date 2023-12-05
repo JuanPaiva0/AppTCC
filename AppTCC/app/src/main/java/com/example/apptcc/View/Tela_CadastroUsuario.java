@@ -59,8 +59,12 @@ public class Tela_CadastroUsuario extends AppCompatActivity {
                 if (!email.isEmpty()){
                     if (!senha.isEmpty()){
                         if (!cpf.isEmpty()){
-                            //Após a validação seguir para a validação do CPF
-                            validaCpf(cpf);
+                            if (cpf.length() == 11) {
+                                //Após a validação seguir para a validação do CPF
+                                validaCpf(cpf);
+                            } else{
+                                Toast.makeText(this, "Insira um número valido de CPF", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
                             Toast.makeText(this, "Informe seu cpf", Toast.LENGTH_SHORT).show();
                         }
